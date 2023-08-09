@@ -1,4 +1,14 @@
+document.getElementById("arrow_left").addEventListener("click",myFunction);
+function myFunction(){
+	alert("Slide precedente");
+}
+document.getElementById("arrow_right").addEventListener("click",Myotherfunction);
+function Myotherfunction(){
+	alert('Slide suivante');
+	
+}
 const slides = [
+	
 	{
 		"image":"slide1.jpg",
 		"tagLine":"Impressions tous formats <span>en boutique et en ligne</span>"
