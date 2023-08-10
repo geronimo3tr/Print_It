@@ -27,15 +27,19 @@ const bannerText = document.querySelector('#banner > p');
 const numberSlide = slides.length;
 let currentSlideIndex = 0;
 
+const slideInterval = setInterval(autoChangeSlide, 3000);
+
 displaySlide(currentSlideIndex);
 
 arrowleft.addEventListener("click", function () {
 	currentSlideIndex = (currentSlideIndex - 1 + numberSlide) % numberSlide;
 	displaySlide(currentSlideIndex);
+	slideInterval = setInterval(autoChangeSlide, 3000);
 })
 arrowright.addEventListener("click", function () {
 	currentSlideIndex = (currentSlideIndex + 1) % numberSlide;
 	displaySlide(currentSlideIndex);
+	slideInterval = setInterval(autoChangeSlide, 3000);
 	})
 
 	function displaySlide(index) {
@@ -67,3 +71,8 @@ arrowright.addEventListener("click", function () {
 		dots.children[currentSlideIndex].classList.add('dot_selected');
 	  }
 	  AddDots();
+
+	  function autoChangeSlide() {
+		currentSlideIndex = (currentSlideIndex + 1) % numberSlide;
+		displaySlide(currentSlideIndex);
+	}
