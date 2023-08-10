@@ -27,19 +27,15 @@ const bannerText = document.querySelector('#banner > p');
 const numberSlide = slides.length;
 let currentSlideIndex = 0;
 
-const slideInterval = setInterval(autoChangeSlide, 3000);
-
 displaySlide(currentSlideIndex);
 
 arrowleft.addEventListener("click", function () {
 	currentSlideIndex = (currentSlideIndex - 1 + numberSlide) % numberSlide;
 	displaySlide(currentSlideIndex);
-	slideInterval = setInterval(autoChangeSlide, 3000);
 })
 arrowright.addEventListener("click", function () {
 	currentSlideIndex = (currentSlideIndex + 1) % numberSlide;
 	displaySlide(currentSlideIndex);
-	slideInterval = setInterval(autoChangeSlide, 3000);
 	})
 
 	function displaySlide(index) {
@@ -72,7 +68,20 @@ arrowright.addEventListener("click", function () {
 	  }
 	  AddDots();
 
-	  function autoChangeSlide() {
-		currentSlideIndex = (currentSlideIndex + 1) % numberSlide;
-		displaySlide(currentSlideIndex);
-	}
+// Function to change the slide to the next one
+function nextSlide() {
+    currentSlideIndex = (currentSlideIndex + 1) % numberSlide;
+    displaySlide(currentSlideIndex);
+}
+
+// Set interval to change slide every 3 seconds
+let slideInterval = setInterval(nextSlide, 3000);
+
+// Function to start the slide interval
+function startSlideInterval() {
+    slideInterval = setInterval(nextSlide, 3000);
+}
+
+// Stop the interval when user interacts with the carousel
+banner.addEventListener("mouseenter", () => clearInterval(slideInterval));
+banner.addEventListener("mouseleave", startSlideInterval);
