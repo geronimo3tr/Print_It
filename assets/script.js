@@ -17,9 +17,12 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
+const banner = document.getElementById('banner');
 const arrowleft = document.querySelector('.arrow_left');
 const arrowright = document.querySelector('.arrow_right');
 const dots = document.querySelector('.dots');
+const bannerImage = document.querySelector('#banner > img');
+const bannerText = document.querySelector('#banner > p');
 
 const numberSlide = slides.length;
 let currentSlideIndex = 0;
@@ -37,23 +40,30 @@ arrowright.addEventListener("click", function () {
 
 	function displaySlide(index) {
 		const slide = slides[index];
+		bannerImage.src = `./assets/images/slideshow/${slides[index].image}`;
+  		bannerText.innerHTML = slide.tagLine;
+		AddDots();
 	  }
 
 	  function createDot(index) {
 		const dot = document.createElement("div");
 		dot.classList.add("dot");
 		dot.addEventListener("click", function () {
-		  currentSlideIndex = index;
+		  currentSlideIndex = index; // Update the current slide index
 		  displaySlide(currentSlideIndex);
+		  AddDots(); // Update the dot selection
 		});
 		dots.appendChild(dot);
 	  }
 	  
 	  function AddDots() {
+		dots.innerHTML = '';
 		for (let i = 0; i < numberSlide; i++) {
 		  createDot(i);
 		}
+		// Remove 'dot_selected' class from all dots
+		Array.from(dots.children).forEach(dot => dot.classList.remove('dot_selected'));
+		// Add 'dot_selected' class to the current dot
+		dots.children[currentSlideIndex].classList.add('dot_selected');
 	  }
-	  
 	  AddDots();
-
